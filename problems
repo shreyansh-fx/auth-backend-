@@ -1,0 +1,2 @@
+bruh , in ensureAuthenticated i wasnt properlly validating the token , and now im confused about the sendond middleware i created used by the first one , lol , do i even need diff files for that?
+

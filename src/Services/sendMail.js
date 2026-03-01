@@ -1,19 +1,19 @@
 const transporter = require("../Config/nodeMailer.js");
 
-const sendEmail = async ({ to, name }) => {
-  try {
-    await transporter.sendMail({
-      from: `"Connect" <${process.env.SMTP_USER}>`,
-      to: to,
-      subject: "Welcome 🚀",
-      html: welcomeTemplate(name.toUpperCase()),
-    });
+async function registrationEmail({ to, name }) {
+    try {
+        await transporter.sendMail({
+            from: `"Connect" <${process.env.SMTP_USER}>`,
+            to: to,
+            subject: "Welcome 🚀",
+            html: welcomeTemplate(name.toUpperCase()),
+        });
 
-    console.log("Email sent successfully");
-  } catch (error) {
-    console.error("Email error:", error.message);
-  }
-};
+        console.log("Email sent successfully");
+    } catch (error) {
+        console.error("Email error:", error.message);
+    }
+}
 
 const welcomeTemplate = (name) => {
   return `
@@ -93,6 +93,10 @@ const welcomeTemplate = (name) => {
   `;
 };
 
-module.exports = { welcomeTemplate };
 
-module.exports = sendEmail;
+
+
+
+
+module.exports = registrationEmail ;
+

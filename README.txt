@@ -10,3 +10,9 @@ Day 2--> Implemented the signup logic and added nodemailer to send welcome email
 
 1st march->
 -> added logout route with proper security feature
+-> corrected the minor errors that were hanging around in the codebase, couldn't find them without testing the routes, 
+hail INSOMNIA!
+
+2nd march->
+-> added otp gen + verification email, didnt yet add the actuall verification route , kinda confused about the flow 
+-> for password reset , a email will be directly sent to user's email with a link to resetpassword route something

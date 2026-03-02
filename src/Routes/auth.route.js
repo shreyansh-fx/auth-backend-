@@ -1,12 +1,12 @@
-const express = require("express");
-const authRoute = express.Router();
+const { Router } = require("express");
+const authRoute = Router();
 const {
   signupValidation,
   loginValidation,
   ensureAuthenticated,
 } = require("../Middlewares/AuthValidation.js");
 
-const { signup, login } = require("../Controllers/auth.controller.js");
+const { signup, login, logout } = require("../Controllers/auth.controller.js");
 
 authRoute.post("/signup", signupValidation, signup);
 authRoute.post("/login", loginValidation, login);

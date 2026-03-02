@@ -1,5 +1,8 @@
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("./tokenValidation.js");
+const tokenBlacklist = require("../Models/blacklist.model.js");
+
 
 const signupValidation = (req, res, next) => {
   const schema = Joi.object({
@@ -30,18 +33,22 @@ const loginValidation = (req, res, next) => {
 };
 
 const ensureAuthenticated = async (req, res, next) => {
-  const token = req.cookies.token; 
-  const decoded = verifyToken(token);
+  const token = req.cookies.token;
 
   try {
+    const decoded = verifyToken(token); //jwt.verify() throws error when not valid , so we wrap it in try catch block to handle that error and send proper response to the client
+
     if (!decoded) {
       return res
         .status(403)
         .json({ message: "Unauthorized, JWT token is required" });
     }
 
-    // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    // req.user = decoded;
+    const blacklistedToken = await tokenBlacklist.findOne({ token });
+
+    if (blacklistedToken) {
+      return res.status(401).json({ message: "Unauthorized, token is blacklisted" });
+    }  //logout tokens shouldn't be able to access anymore
 
     req.user = decoded;
 

@@ -2,13 +2,22 @@ const bcrypt = require("bcryptjs");
 const User = require("../Models/user.model.js");
 const tokenBlacklist = require("../Models/blacklist.model.js");
 const genToken = require("../Services/genToken.js");
-const registrationEmail = require("../Services/sendMail.js");
+const {
+  registrationEmail,
+  verificationEmail,
+} = require("../Services/sendMail.js");
 
 const signup = async (req, res) => {
   const { email, name, password } = req.body;
 
   if (!email || !name || !password) {
     return res.status(400).json({ message: "Enter all Details" });
+  }
+
+  const existingUser = await User.findOne({ email }); //data extracted with pass
+
+  if (existingUser) {
+    return res.status(400).json({ message: "user already exists" });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -67,7 +76,7 @@ const logout = async (req, res) => {
     });
   }
 
-  req.clearCookie("token");
+  res.clearCookie("token");
   return res.status(200).json({ message: "user logged out successfully" });
 };
 

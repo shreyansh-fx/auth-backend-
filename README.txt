@@ -1,3 +1,22 @@
+🚀 Backend System (Node.js + Express + MongoDB)
+
+A backend project where I built a complete authentication system along with REST APIs and email features. The focus was on writing clean, scalable code and following good backend practices.
+
+✨ Features
+🔐 User authentication (signup, login, logout) using JWT
+🔒 Passwords stored securely with hashing
+⚙️ Well-structured REST APIs with proper routing
+🧩 Middleware and centralized error handling
+📧 Email integration for welcome messages and notifications
+🗄️ MongoDB for data storage with structured schemas
+📈 Built with scalability and maintainability in mind
+🛠️ Tech Stack
+Backend: Node.js, Express.js
+Database: MongoDB (Mongoose)
+Authentication: JWT, bcrypt
+Email: Nodemailer
+
+
 Day 1--> Created the folder structure and made a signup route, user model.
 Day 2--> Implemented the signup logic and added nodemailer to send welcome email to users after successful registration.
 
